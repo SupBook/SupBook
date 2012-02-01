@@ -16,4 +16,5 @@ class User < ActiveRecord::Base
                       :'30' => "30x30#"
                     }
 
+  has_many :posts
 end
