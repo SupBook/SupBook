@@ -5,4 +5,30 @@
 <ul class="unstyled">
   <li><i class="icon-user"></i><%= @user.first_name + " " + @user.last_name %></li>
   <li><i class="icon-envelope"></i><%= @user.email %></li>
+</ul>
 
+
+<h2>Amis avec :</h2>
+      <ul>
+        <% for friendship in @user.friendships %>
+          <li>
+            <%= h friendship.friend.name %>
+            <% if !current_user.nil? && @user.id == current_user.id %>
+            (<%= link_to "Supprimer", friendship, :method => :delete %>)
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+
+      <h2>Amis de :</h2>
+      <ul>
+        <% for inverse_friends in @user.inverse_friends %>
+          <li>
+            <%= h inverse_friends.name %>
+          </li>
+        <% end %>
+      </ul>
+
+<% if !current_user.nil? && @user.id != current_user.id && !current_user.friends.include?(@user) %>
+          <%= link_to "Ajouter à ses amis", friendships_path(:friend_id => @user), :method => :post %> |
+      <% end %>

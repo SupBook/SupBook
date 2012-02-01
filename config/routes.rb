@@ -5,6 +5,8 @@ SupBook::Application.routes.draw do
 
   devise_for :users
   resources :users
+  resources :friendships
+
 
   get "content/home"
 
