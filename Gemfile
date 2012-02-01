@@ -4,6 +4,7 @@ gem 'rails', '3.2.1'
 gem "devise"
 gem "paperclip", "~> 2.0"
 gem 'activeadmin'
+gem 'cancan'
 
 gem 'sass-rails',   '~> 3.2.3'
 gem 'meta_search',    '>= 1.1.0.pre'

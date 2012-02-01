@@ -77,6 +77,16 @@
     </div><!--/span-->
     <div class="span9">
 
+
+      <% flash.each do |key, value| %>
+
+        <div class="alert <%= key %>">
+          <a class="close" href="#">×</a>
+          <p><%= raw(value) %></p>
+        </div>
+        <%= javascript_tag("$('.alert').delay(4000).slideUp('normal');") %>
+      <% end %>
+
       <%= yield %>
 
     </div><!--/span-->
