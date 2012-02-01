@@ -11,6 +11,7 @@ SupBook::Application.routes.draw do
   resources :users
   resources :friendships
 
+	resources :comments
 
   get "content/home"
 

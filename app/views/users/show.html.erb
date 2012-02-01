@@ -1,5 +1,55 @@
 <h2>Profil de <%= @user.first_name + " " + @user.last_name %></h2>
 <p style="float: right"><%= link_to "Supprimer", user_path(@user), :method => :delete, :class => "btn" %></p>
+<style>
+.user_posts{
+	background: none repeat scroll 0 0 #EDEDED;
+    list-style: none outside none;
+    margin-top: 15px;
+    padding: 10px;
+    overflow: hidden;
+}
+.user_posts .date{
+	float: right;
+    font-size: 10px;
+    font-style: italic;
+}
+.comment{
+	background: none repeat scroll 0 0 #EDEFF4;
+    border-top: 1px solid #DBDBDB;
+    list-style: none outside none;
+    padding: 10px 10px 10px 50px;
+}
+.comment .date{
+	float: right;
+    font-size: 10px;
+    font-style: italic;
+}
+.owner{
+	font-weight:bold;
+	font-size:12px;
+}
+</style>
+<ul>
+<% @user.posts.each do |post| %>
+	<li class="user_posts"> 
+		<u>De : <%= User.find(post.owner).first_name %> <%= User.find(post.owner).last_name %></u><br />
+		<%= post.content %><br />
+		<span class="date"><%= post.created_at %></span>
+		
+	
+	</li>
+	<% post.comments.each do |comment| %>
+		<li class="comment">
+			<span class="owner"><%= User.find(comment.owner_id).first_name %> <%= User.find(comment.owner_id).last_name %></span><br />
+    		<%= comment.content %>
+    		<span class="date"><%= comment.created_at %></span>
+    	</li>
+	<% end %>
+<% end %>
+</ul>
+
+
+<p style="float: right"><%= link_to "Supprimer", user_path(@user), :method => :delete %></p>
 <p>
   <%= image_tag @user.avatar.url("300") %>
 </p>
@@ -52,3 +102,4 @@
 <% if !current_user.nil? && @user.id != current_user.id && !current_user.friends.include?(@user) %>
   <%= link_to "Ajouter à ses amis", friendships_path(:friend_id => @user), :method => :post %>
 <% end %>
+
