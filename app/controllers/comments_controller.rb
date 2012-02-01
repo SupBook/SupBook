@@ -3,6 +3,7 @@ class CommentsController < InheritedResources::Base
 	def create
     @comment = Comment.new(params[:comment])
     @comment.created_at = DateTime.now
+    @comment.owner_id = current_user.id
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @comment, notice: 'Comment was successfully created.' }

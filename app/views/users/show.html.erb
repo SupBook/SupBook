@@ -1,4 +1,5 @@
 <h2>Profil de <%= @user.first_name + " " + @user.last_name %></h2>
+
 <style>
 .user_posts{
 	background: none repeat scroll 0 0 #EDEDED;
@@ -27,7 +28,62 @@
 	font-weight:bold;
 	font-size:12px;
 }
+#post_content{
+	height: 50px;
+}
+#new_post{
+	margin-left: 26px;
+}
+.post_comment{
+	background-color: #F2F2F2;
+    list-style: none outside none;
+    margin: 0;
+    padding-bottom: 1px;
+    padding-left: 50px;
+    padding-top: 1px;
+}
+.post_comment textarea{
+	height: 20px;
+    width: 400px;
+}
+.show_comment{
+	cursor: pointer;
+	margin: 5px;
+}
 </style>
+<script type="text/javascript">
+ $(document).ready(function() {
+$('.show_comment').click(function(){
+	$(this).parent().hide();
+	$(this).parent().next('.post_comment').show();
+	
+})
+});
+</script>
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Message" %>
+    <%= f.text_area :content %>
+  </div>
+
+   <div class="actions">
+    <%= f.submit :value => "Envoyer" %>
+  </div>
+<% end %>
+
+
 <ul>
 <% @user.posts.each do |post| %>
 	<li class="user_posts"> 
@@ -44,6 +100,27 @@
     		<span class="date"><%= comment.created_at %></span>
     	</li>
 	<% end %>
+	<li class="post_comment">
+		<input class="show_comment" type="button" value="Commenter" />
+	</li>
+	<li class="post_comment" style="display:none;">
+	<%= form_for(@comment) do |f| %>
+
+
+  
+  <div class="field">
+     <%= f.hidden_field :post_id , :value => post.id  %>
+  </div>
+  <div class="field">
+    <%= f.label "Commenter" %>
+    <%= f.text_area :content %>
+  </div>
+  <div class="actions">
+    <%= f.submit :value => "Envoyer" %>
+  </div>
+<% end %>
+
+	</li>
 <% end %>
 </ul>
 
