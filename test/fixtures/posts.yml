@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  content: MyText
+  owner: 
+  reciever: 
+  created_at: 2012-02-01
+
+two:
+  content: MyText
+  owner: 
+  reciever: 
+  created_at: 2012-02-01
