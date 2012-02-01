@@ -39,7 +39,7 @@
           <% end %>
           <li><a href="<%= url_for users_url %>">Utilisateurs</a></li>
           <li><a href="/invitations">Inviter un ami</a></li>
-          <li><a href="<%= url_for global_path %>">Inviter un ami</a></li>
+          <li><a href="<%= url_for global_path %>">Envoyer un message global</a></li>
         </ul>
         <% if current_user.nil? %>
           <div class="pull-right user-buttons">
