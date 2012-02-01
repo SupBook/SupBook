@@ -6,8 +6,7 @@ class InvitationController < ApplicationController
 
   def create
 
-    raise email
-    InviteUser.invite_friend(email).deliver
+    InviteUser.invite_friend(params[:email]).deliver
 
   end
 
