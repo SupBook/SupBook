@@ -1,0 +1,8 @@
+<h2>Profil de <%= @user.first_name + " " + @user.last_name %></h2>
+<p>
+  <%= image_tag @user.avatar.url("300") %>
+</p>
+<ul class="unstyled">
+  <li><i class="icon-user"></i><%= @user.first_name + " " + @user.last_name %></li>
+  <li><i class="icon-envelope"></i><%= @user.email %></li>
+
