@@ -22,3 +22,21 @@
 
 
 <%= link_to 'Back', posts_path %>
+
+<h3>Commentaires</h3>
+
+<table>
+  <tr>
+    <th>Owner</th>
+    <th>Content</th>
+    <th>Date</th>
+  </tr>
+
+<% @post.comments.each do |comment| %>
+  <tr>
+    <td><%= comment.owner_id %></td>
+    <td><%= comment.content %></td>
+    <td><%= comment.created_at %></td>
+  </tr>
+<% end %>
+</table>

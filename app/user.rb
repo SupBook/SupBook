@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
                       :'30' => "30x30#"
                     }
 
-  has_many :posts , :foreign_key => "owner_id"
+  has_many :posts
 
   def name
     return self.first_name + " "  +self.last_name
