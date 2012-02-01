@@ -1,5 +1,5 @@
 <h2>Profil de <%= @user.first_name + " " + @user.last_name %></h2>
-<p style="float: right"><%= link_to "Supprimer", user_path(@user), :method => :delete %></p>
+<p style="float: right"><%= link_to "Supprimer", user_path(@user), :method => :delete, :class => "btn" %></p>
 <p>
   <%= image_tag @user.avatar.url("300") %>
 </p>
