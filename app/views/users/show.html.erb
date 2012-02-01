@@ -1,4 +1,5 @@
 <h2>Profil de <%= @user.first_name + " " + @user.last_name %></h2>
+<p style="float: right"><%= link_to "Supprimer", user_path(@user), :method => :delete %></p>
 <p>
   <%= image_tag @user.avatar.url("300") %>
 </p>
@@ -40,6 +41,14 @@
     </ul>
 <% end %>
 
+<h2>Activités :</h2>
+
+<ul class="unstyled">
+  <% Friendship.last(15).each do |f| %>
+    <li><span style="color: #cccccc;"><%= f.created_at %></span> <%= User.find(f.user_id).name + " est connecté à " + User.find(f.friend_id).name %></li>
+  <% end %>
+</ul>
+
 <% if !current_user.nil? && @user.id != current_user.id && !current_user.friends.include?(@user) %>
-    <%= link_to "Ajouter à ses amis", friendships_path(:friend_id => @user), :method => :post %>
+  <%= link_to "Ajouter à ses amis", friendships_path(:friend_id => @user), :method => :post %>
 <% end %>

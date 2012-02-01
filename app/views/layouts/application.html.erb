@@ -34,14 +34,17 @@
       <div class="nav-collapse">
         <ul class="nav">
           <li class="active"><a href="#">Home</a></li>
+          <% unless current_user.nil? %>
+            <li><a href="<%= url_for user_path(current_user) %>">Mon Profil</a></li>
+          <% end %>
           <li><a href="<%= url_for users_url %>">Utilisateurs</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-                <% if current_user.nil? %>
+        <% if current_user.nil? %>
           <div class="pull-right user-buttons">
             <p class="navbar-text pull-right"><a href="<%= url_for new_user_session_path %>" class="btn" style="color: grey;">Connexion</a>
-            <a href="<%= url_for new_user_registration_path %>" class="btn danger">Inscription</a></p>
+              <a href="<%= url_for new_user_registration_path %>" class="btn danger">Inscription</a></p>
           </div>
         <% else %>
           <p class="navbar-text pull-right"><%= link_to "Déconnexion", destroy_user_session_path, :method => :delete %></li>
@@ -58,25 +61,29 @@
       <div class="well sidebar-nav">
         <ul class="nav nav-list">
           <li class="nav-header">Sidebar</li>
-          <li class="active"><a href="#">Link</a></li>
-          <li><a href="#">Link</a></li>
-          <li><a href="#">Link</a></li>
-          <li><a href="#">Link</a></li>
-          <li class="nav-header">Sidebar</li>
-          <li><a href="#">Link</a></li>
-          <li><a href="#">Link</a></li>
-          <li><a href="#">Link</a></li>
-          <li><a href="#">Link</a></li>
-          <li><a href="#">Link</a></li>
-          <li><a href="#">Link</a></li>
-          <li class="nav-header">Sidebar</li>
-          <li><a href="#">Link</a></li>
-          <li><a href="#">Link</a></li>
-          <li><a href="#">Link</a></li>
+
+          <% User.last(15).each do |u| %>
+            <li><a href="<%= url_for user_path(u) %>"><%= u.name %></a></li>
+          <% end  %>
+
+          <li class="nav-header">Dernieres activites</li>
+          <% Friendship.last(15).each do |f| %>
+            <li style="font-size: 10px;"><span style="color: #cccccc;"><%= f.created_at.strftime("%H:%M") %></span> <%= User.find(f.user_id).name + " est connecté à " + User.find(f.friend_id).name %></li>
+          <% end %>
         </ul>
       </div><!--/.well -->
     </div><!--/span-->
     <div class="span9">
+
+
+      <% flash.each do |key, value| %>
+
+        <div class="alert <%= key %>">
+          <a class="close" href="#">×</a>
+          <p><%= raw(value) %></p>
+        </div>
+        <%= javascript_tag("$('.alert').delay(4000).slideUp('normal');") %>
+      <% end %>
 
       <%= yield %>
 
