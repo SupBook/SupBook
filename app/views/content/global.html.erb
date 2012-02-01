@@ -1,0 +1,9 @@
+<h1>Envoi de message</h1>
+<%= form_tag "globalsend" do %>
+  <%= label_tag(:text, "Message :") %>
+  <%= text_field_tag(:text) %>
+  <%= submit_tag("Envoyer") %>
+<% end %>
+
+
+
