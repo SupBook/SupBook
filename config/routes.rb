@@ -1,5 +1,9 @@
 SupBook::Application.routes.draw do
 
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   get "users/show"
   resources :posts
 
