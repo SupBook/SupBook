@@ -39,6 +39,7 @@
           <% end %>
           <li><a href="<%= url_for users_url %>">Utilisateurs</a></li>
           <li><a href="/invitations">Inviter un ami</a></li>
+          <li><a href="<%= url_for global_path %>">Inviter un ami</a></li>
         </ul>
         <% if current_user.nil? %>
           <div class="pull-right user-buttons">
@@ -59,7 +60,7 @@
     <div class="span3">
       <div class="well sidebar-nav">
         <ul class="nav nav-list">
-          <li class="nav-header">Sidebar</li>
+          <li class="nav-header">Utilisateurs</li>
 
           <% User.last(15).each do |u| %>
             <li><a href="<%= url_for user_path(u) %>"><%= u.name %></a></li>
