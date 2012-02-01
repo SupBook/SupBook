@@ -14,6 +14,7 @@ SupBook::Application.routes.draw do
 
   get "content/home"
 
+  match "acceptFriend" => "friendships#accept"
   match "/invitations" => "invitation#new"
   match "/invitations/save" => "invitation#create"
   root :to => 'content#home'
