@@ -13,24 +13,32 @@
 <h2>Amis avec :</h2>
 <ul>
   <% for friendship in @user.friendships %>
-      <li>
-        <%= h friendship.friend.name %>
-        <% if !current_user.nil? && @user.id == current_user.id %>
-            (<%= link_to "Supprimer", friendship, :method => :delete %>)
-        <% end %>
-      </li>
+    <li>
+      <%= h friendship.friend.name %>
+      <% if !current_user.nil? && @user.id == current_user.id %>
+        (<%= link_to "Supprimer", friendship, :method => :delete %>)
+      <% end %>
+    </li>
   <% end %>
 </ul>
 
 <h2>Amis de :</h2>
 <ul>
   <% for inverse_friends in @user.inverse_friends %>
-      <li>
-        <%= h inverse_friends.name %>
-      </li>
+    <li>
+      <%= h inverse_friends.name %>
+    </li>
+  <% end %>
+</ul>
+
+<h2>Activités :</h2>
+
+<ul class="unstyled">
+  <% Friendship.last(15).each do |f| %>
+    <li><span style="color: #cccccc;"><%= f.created_at %></span> <%= User.find(f.user_id).name + " est connecté à " + User.find(f.friend_id).name %></li>
   <% end %>
 </ul>
 
 <% if !current_user.nil? && @user.id != current_user.id && !current_user.friends.include?(@user) %>
-    <%= link_to "Ajouter à ses amis", friendships_path(:friend_id => @user), :method => :post %>
+  <%= link_to "Ajouter à ses amis", friendships_path(:friend_id => @user), :method => :post %>
 <% end %>
