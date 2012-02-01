@@ -15,18 +15,12 @@
     <%= f.label :content %><br />
     <%= f.text_area :content %>
   </div>
-  <div class="field">
-    <%= f.label :user %><br />
-    <%= f.text_field :user %>
-  </div>
+
   <div class="field">
     <%= f.label :reciever %><br />
-    <%= f.text_field :reciever %>
+    <%= f.select :reciever_id , User.find(:all).map { |u| [u.email, u.id] } %>
   </div>
-  <div class="field">
-    <%= f.label :created_at %><br />
-    <%= f.date_select :created_at %>
-  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
