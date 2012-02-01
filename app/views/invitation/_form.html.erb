@@ -1,0 +1,5 @@
+<%= form_tag "/invitations/save" do %>
+  <%= label_tag(:email, "email invitation:") %>
+  <%= text_field_tag(:email) %>
+  <%= submit_tag("Send") %>
+<% end %>
