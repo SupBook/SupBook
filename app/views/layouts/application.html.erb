@@ -37,7 +37,15 @@
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-        <p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>
+                <% if current_user.nil? %>
+          <div class="pull-right user-buttons">
+            <p class="navbar-text pull-right"><a href="<%= url_for new_user_session_path %>" class="btn" style="color: grey;">Connexion</a>
+            <a href="<%= url_for new_user_registration_path %>" class="btn danger">Inscription</a></p>
+          </div>
+        <% else %>
+          <p class="navbar-text pull-right"><%= link_to "Déconnexion", destroy_user_session_path, :method => :delete %></li>
+
+        <% end %>
       </div><!--/.nav-collapse -->
     </div>
   </div>
