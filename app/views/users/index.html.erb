@@ -1,0 +1,22 @@
+<h1>Liste des utilisateurs</h1>
+
+<table>
+  <tr>
+    <th>Nom</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= link_to "Voir", user %></td>
+
+        <% if !current_user.nil? && user.id != current_user.id && !current_user.friends.include?(user) && !current_user.inverse_friends.include?(user)%>
+            <td><%= link_to "Ajouter à mes amis", friendships_path(:friend_id => user), :method => :post %></td>
+        <% end %>
+      </tr>
+  <% end %>
+</table>
+
+<br/>
